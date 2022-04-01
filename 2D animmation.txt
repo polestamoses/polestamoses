@@ -1,0 +1,34 @@
+from tkinter import *
+import time
+
+WIDTH = 600
+HEIGHT = 500
+xVelocity = 4
+yVelocity = 5
+
+window = Tk()
+
+canvas = Canvas(window, width=WIDTH, height=HEIGHT)
+canvas.pack()
+bgImage = PhotoImage(file='faith1.png')
+myBgImage = canvas.create_image(0,0, image=bgImage, anchor=NW)
+
+image = PhotoImage(file='twitter-logo (2).png')
+myImage = canvas.create_image(0,0, image=image, anchor=NW)
+
+imageWidth = image.width()
+imageHeight = image.height()
+
+while True:
+    coordinates = canvas.coords(myImage)
+    if (coordinates[0] >= (WIDTH - imageWidth)) or coordinates[0] < 0:
+        xVelocity = -xVelocity
+    if (coordinates[1] >= HEIGHT - imageHeight) or coordinates[1] < 0:
+        yVelocity = -yVelocity
+
+    canvas.move(myImage, xVelocity, yVelocity)
+    window.update()
+    time.sleep(0.01)
+
+
+window.mainloop()
